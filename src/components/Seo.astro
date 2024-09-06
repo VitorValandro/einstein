@@ -1,0 +1,30 @@
+---
+import type { SBAsset } from '../types';
+
+interface Props {
+  title: string;
+  description: string;
+  favicon?: SBAsset;
+}
+
+const { title, description, favicon } = Astro.props;
+
+const defaultOgImage = "https://a-us.storyblok.com/f/1021619/258x168/b49b50638c/logo.svg";
+const faviconUrl = favicon?.filename
+  ? favicon.filename
+  : `/favicon.ico`;
+---
+
+<Fragment>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={defaultOgImage} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={defaultOgImage} />
+
+  <!-- Use favicon from CMS if it exists, otherwise use default -->
+  <link rel="icon" href={faviconUrl} type={favicon?.filename ? "image/png" : "image/x-icon" } sizes="any" />
+</Fragment>
