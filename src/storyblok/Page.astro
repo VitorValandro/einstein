@@ -1,9 +1,9 @@
 ---
-import { storyblokEditable, SbBlokData } from '@storyblok/astro'
+import { storyblokEditable, SbBlokData } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-import Layout from '../layouts/Layout.astro';
-import { Blok, SBAsset } from '../types';
-import Hero from './Hero.astro';
+import Layout from "../layouts/Layout.astro";
+import { Blok, SBAsset } from "../types";
+import Hero from "./Hero.astro";
 
 interface Props {
   blok: Blok<{
@@ -13,7 +13,8 @@ interface Props {
       description: string;
       favicon?: SBAsset;
     }>[];
-  }>
+    footer: SbBlokData[];
+  }>;
 }
 
 const { blok } = Astro.props;
@@ -21,11 +22,12 @@ const { title, description, favicon } = blok.seo[0];
 ---
 
 <Layout title={title} description={description} favicon={favicon}>
-  <main  {...storyblokEditable(blok)}>
-  {
-    blok.body?.map((blok) => {
-      return <StoryblokComponent blok={blok} />
-    })
-  }
+  <main {...storyblokEditable(blok)}>
+    {
+      blok.body?.map((blok) => {
+        return <StoryblokComponent blok={blok} />;
+      })
+    }
+    <StoryblokComponent blok={blok.footer[0]} />
   </main>
 </Layout>
