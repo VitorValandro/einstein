@@ -31,4 +31,11 @@ export interface SBCta {
   icon?: SBAsset;
 }
 
+export interface SBTestimonial {
+  image: SBAsset;
+  title: string;
+  subtitle: string;
+  text: string;
+}
+
 export type Blok<T> = SbBlokData & T;

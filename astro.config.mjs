@@ -23,6 +23,7 @@ export default defineConfig({
           results: 'storyblok/Results',
           about: 'storyblok/About',
           partners: 'storyblok/Partners',
+          testimonials: 'storyblok/Testimonials',
         },
         apiOptions: {
           region: 'us',

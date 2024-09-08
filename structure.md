@@ -1,0 +1,9 @@
+- hero
+- impacto
+- sobre
+- parceiros
+- testemunho
+- seja um estudante
+- seja um voluntario
+- apoie (pricing e pix)
+- footer (redes sociais)

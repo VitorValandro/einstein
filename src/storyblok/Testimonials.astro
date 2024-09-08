@@ -1,0 +1,23 @@
+---
+import { SbRichTextOptions } from "@storyblok/astro";
+import RichText from "../components/RichText.astro";
+import TestimonialsList from "../components/TestimonialsList";
+import { Blok, SBRichText, SBTestimonial } from "../types";
+
+interface Props {
+  blok: {
+    headline: SBRichText;
+    items: Blok<SBTestimonial>[];
+  };
+}
+
+const { blok } = Astro.props;
+const { headline, items } = blok;
+---
+
+<section class="flex w-full flex-col items-center px-6">
+  <div class="flex max-w-container flex-col w-full py-8 md:py-16 gap-3 md:gap-8">
+    <RichText text={headline} />
+    <TestimonialsList client:only testimonials={items} />
+  </div>
+</section>
