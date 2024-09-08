@@ -10,7 +10,9 @@ interface Props {
 const { title, description, favicon } = Astro.props;
 
 const defaultOgImage = "https://a-us.storyblok.com/f/1021619/258x168/b49b50638c/logo.svg";
-const faviconUrl = favicon?.filename ? favicon.filename : `/public/favicon.ico`;
+const faviconUrl = favicon?.filename
+  ? favicon.filename
+  : "https://a-us.storyblok.com/f/1021619/x/360cf0e08f/favicon.ico";
 ---
 
 <Fragment>
