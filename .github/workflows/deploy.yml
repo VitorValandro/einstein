@@ -16,6 +16,8 @@ permissions:
 
 jobs:
   build:
+    environment:
+      name: github-pages
     env:
       STORYBLOK_TOKEN: ${{ vars.STORYBLOK_TOKEN }}
     runs-on: ubuntu-latest
