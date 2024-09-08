@@ -1,0 +1,100 @@
+---
+import RichText from "../components/RichText.astro";
+import { Blok, SBAsset, SBLink, SBRichText } from "../types";
+import { getUrlFromSBLink, getWebpVersionFromSBImage } from "../utilts";
+
+interface Props {
+  blok: {
+    headline: SBRichText;
+    description: SBRichText;
+    plans: Blok<{
+      value: number;
+      description: string;
+      link: SBLink;
+    }>[];
+    paymentInformation: SBRichText;
+    picpayCta: Blok<{
+      image: SBAsset;
+      link: SBLink;
+    }>[];
+  };
+}
+
+const { blok } = Astro.props;
+const { headline, description, plans, paymentInformation } = blok;
+---
+
+<style>
+  .plan-item {
+    position: relative;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .plan-item:hover .bulleted-line {
+    width: 100%;
+  }
+
+  .bulleted-line {
+    width: 0;
+    height: 2px;
+    background-color: #408ad5; /* Change to a highlight color */
+    transition: width 0.5s ease;
+  }
+
+  .bullet {
+    background-color: #408ad5; /* Change to a highlight color */
+  }
+</style>
+
+<section class="flex w-full flex-col items-center px-6">
+  <div class="flex max-w-container flex-col w-full py-8 md:py-16 gap-3 md:gap-8">
+    <RichText text={headline} />
+    <RichText text={description} />
+
+    <ul class="flex flex-col gap-2">
+      {
+        plans.map((plan) => (
+          <a
+            href={getUrlFromSBLink(plan.link)}
+            target="_blank"
+            class="w-full"
+            title="Clique para doar"
+          >
+            <li class="plan-item flex flex-col w-full p-4 gap-8 border border-dashed border-brand-tertiary-600 rounded-xl md:border-0">
+              <div class="flex flex-col flex-1">
+                <div class="flex flex-col md:flex-row justify-between md:items-center gap-2 relative">
+                  <div class="flex flex-row items-end gap-1 justify-center">
+                    <span class="font-bold">R$</span>
+                    <h3 class="text-4xl font-bold text-brand-secondary-default">{plan.value}</h3>
+                    <span class="text-brand-tertiary-600 font-light">/mês</span>
+                  </div>
+                  <div class="flex items-center justify-center md:justify-end flex-1 relative">
+                    <div class="bulleted-line absolute left-0 bottom-1/2 transform translate-y-1/2" />
+                  </div>
+                  <p class="font-light leading-6 text-center md:text-right">{plan.description}</p>
+                </div>
+              </div>
+            </li>
+          </a>
+        ))
+      }
+    </ul>
+
+    <div class="flex md:flex-row w-full justify-between h-fit gap-3">
+      <RichText text={paymentInformation} />
+      <a
+        class="w-[20%] self-end md:h-[200px]"
+        href={getUrlFromSBLink(blok.picpayCta[0].link)}
+        target="_blank"
+        title="Clique para doar"
+      >
+        <img
+          src={getWebpVersionFromSBImage(blok.picpayCta[0].image.filename)}
+          alt={blok.picpayCta[0].image.alt}
+        />
+      </a>
+    </div>
+  </div>
+</section>
