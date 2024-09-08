@@ -8,6 +8,8 @@ const env = loadEnv("", process.cwd(), 'STORYBLOK');
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://vitorvalandro.github.io',
+  base: 'einstein',
   integrations:
     [
       tailwind({
