@@ -1,5 +1,7 @@
 import { SbBlokData } from "@storyblok/astro";
+import type { RichTextType } from "storyblok-rich-text-astro-renderer";
 
+export type SBRichText = RichTextType;
 export interface SBLink {
   anchor?: string;
   cached_url: string;
@@ -21,6 +23,12 @@ export interface SBAsset {
   is_external_url: boolean;
   name: string;
   title: string;
+}
+
+export interface SBCta {
+  title: string;
+  link?: SBLink;
+  icon?: SBAsset;
 }
 
 export type Blok<T> = SbBlokData & T;

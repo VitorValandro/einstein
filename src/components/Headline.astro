@@ -1,0 +1,33 @@
+---
+interface Props {
+  id?: string;
+  className?: string;
+  element: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+}
+
+const { id, className, element } = Astro.props;
+
+const getStyles = (element: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") => {
+  switch (element) {
+    case "h1":
+      return `text-5xl md:text-6xl font-medium`;
+    case "h2":
+      return `font-medium text-3xl md:text-4xl`;
+    case "h3":
+      return `font-medium text-2xl md:text-3xl}`;
+    case "h4":
+      return `font-medium text-lg md:text-2xl}`;
+    case "h5":
+      return `font-medium text-lg}`;
+    case "h6":
+      return `font-medium text-base}`;
+    default:
+      return "";
+  }
+};
+
+const Element = element;
+---
+
+<!-- Dynamic element creation in Astro using its `set:html` directive -->
+<Element id={id} class:list={[getStyles(element), className]}><slot /></Element>

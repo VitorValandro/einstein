@@ -1,0 +1,37 @@
+---
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import RichTextRenderer from "storyblok-rich-text-astro-renderer/RichTextRenderer.astro";
+import type { RichTextType } from "storyblok-rich-text-astro-renderer";
+import Headline from "./Headline.astro";
+
+export interface Props {
+  text: RichTextType;
+  className?: {
+    heading?: string;
+    paragraph?: string;
+  };
+}
+const { text, className } = Astro.props;
+---
+
+<RichTextRenderer
+  content={text}
+  schema={{
+    nodes: {
+      heading: ({ attrs: { level } }) => ({
+        component: Headline,
+        props: { element: `h${level}`, className: className?.heading },
+      }),
+      paragraph: () => ({
+        component: "p",
+        props: { className: className?.paragraph },
+      }),
+    },
+  }}
+  resolver={(blok) => {
+    return {
+      component: StoryblokComponent,
+      props: { blok },
+    };
+  }}
+/>

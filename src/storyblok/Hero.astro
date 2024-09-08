@@ -1,0 +1,61 @@
+---
+import { Blok, SBAsset, SBCta, SBRichText } from "../types";
+import RichText from "../components/RichText.astro";
+import { getWebpVersionFromSBImage } from "../utilts";
+import Button from "../components/Button";
+
+interface Props {
+  blok: {
+    title: SBRichText;
+    description: SBRichText;
+    image: SBAsset;
+    cta: Blok<SBCta>[];
+  };
+}
+
+const { blok } = Astro.props;
+const { title, description, image } = blok;
+const cta = blok.cta[0];
+---
+
+<section
+  class="flex flex-col items-center h-[600px] px-6 bg-gradient-to-bl from-brand-primary-300 to-white"
+>
+  <div
+    class="flex-1 flex flex-col md:flex-row gap-12 md:gap-4 max-w-container py-8 md:py-16 justify-between items-center justify-center"
+  >
+    <div class="flex flex-col gap-4 w-full md:w-[60%]">
+      <RichText text={title} className={{ heading: "font-bold" }} />
+      <RichText className={{ paragraph: "text-2xl text-pretty" }} text={description} />
+
+      <Button
+        variant="Primary"
+        className="w-full md:w-fit"
+        type={{
+          tag: "anchor",
+          href: cta.link,
+        }}
+        client:load
+      >
+        <div class="flex flex-row gap-2 items-center">
+          {
+            cta.icon && (
+              <img
+                class="size-8"
+                src={getWebpVersionFromSBImage(cta.icon.filename)}
+                alt={cta.icon.alt}
+              />
+            )
+          }
+          {cta.title}
+        </div>
+      </Button>
+    </div>
+
+    <img
+      class="w-full md:w-[40%]"
+      src={getWebpVersionFromSBImage(image.filename)}
+      alt={image.alt}
+    />
+  </div>
+</section>

@@ -14,20 +14,28 @@ const hexPercentage = (value) => {
   return hexVal.length == 1 ? "0" + hexVal : hexVal;
 };
 
-const FULL_SCALE = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+const FULL_SCALE = ["default", 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
 
-const generateTransparentColors = (scale, color) => {
-  return scale.reduce((acc, opacity) => {
-    const percentage = opacity / 1000;
+const generateTransparentColors = (
+  scale,
+  color,
+) => {
+  return scale.reduce(
+    (acc, opacity) => {
+      let generatedColor = color;
+      const isDefault = isNaN(Number(opacity)) || opacity === "default";
 
-    return {
-      ...acc,
-      [opacity]:
-        percentage === 1
-          ? `${color}`
-          : `${color}${hexPercentage(opacity / 1000)}`,
-    };
-  }, {});
+      if (!isDefault && typeof opacity === "number") {
+        generatedColor = `${color}${hexPercentage(opacity / 1000)}`;
+      }
+
+      return {
+        ...acc,
+        [opacity]: generatedColor,
+      };
+    },
+    {},
+  );
 };
 
 
@@ -46,7 +54,10 @@ export default {
           secondary: generateTransparentColors(FULL_SCALE, SECONDARY),
           tertiary: generateTransparentColors(FULL_SCALE, TERTIARY),
         }
-      }
+      },
+      maxWidth: {
+        container: "1140px",
+      },
     },
   },
   plugins: [],

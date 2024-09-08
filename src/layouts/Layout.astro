@@ -1,15 +1,15 @@
 ---
-import '@fontsource-variable/inter';
-import inter from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import "@fontsource-variable/inter";
+import inter from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 
-import '../styles/base.css';
-import Seo from '../components/Seo.astro';
-import type { SBAsset } from '../types';
+import "../styles/base.css";
+import Seo from "../components/Seo.astro";
+import type { SBAsset } from "../types";
 
 interface Props {
-	title: string;
-	description: string;
-	favicon?: SBAsset;
+  title: string;
+  description: string;
+  favicon?: SBAsset;
 }
 
 const { title, description, favicon } = Astro.props;
@@ -17,14 +17,14 @@ const { title, description, favicon } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preload" as="font" type="font/woff2" href={inter} crossorigin="anonymous" />
-		<meta name="generator" content={Astro.generator} />
-		<Seo title={title} description={description} favicon={favicon} />
-	</head>
-	<body class="bg-neutral-light-100">
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preload" as="font" type="font/woff2" href={inter} crossorigin="anonymous" />
+    <meta name="generator" content={Astro.generator} />
+    <Seo title={title} description={description} favicon={favicon} />
+  </head>
+  <body class="bg-white">
+    <slot />
+  </body>
 </html>
