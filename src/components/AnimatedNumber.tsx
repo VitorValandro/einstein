@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { cn } from "../utilts";
+import { cn } from "../utils";
 
 interface Props {
   finalValue: number;

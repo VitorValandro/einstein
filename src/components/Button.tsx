@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler, ReactNode } from "react";
 import { SBLink } from "../types";
-import { cn, getUrlFromSBLink } from "../utilts";
+import { cn, getUrlFromSBLink } from "../utils";
 
 export type ButtonVariants = "Primary" | "Outline" | "None";
 
