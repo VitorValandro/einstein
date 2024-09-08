@@ -17,7 +17,7 @@ permissions:
 jobs:
   build:
     env:
-      STORYBLOK_TOKEN: ${{ secrets.STORYBLOK_TOKEN }}
+      STORYBLOK_TOKEN: ${{ vars.STORYBLOK_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
@@ -25,7 +25,7 @@ jobs:
       - name: Create .env file
         run: |
           rm -f .env
-          echo "STORYBLOK_TOKEN=${{ secrets.STORYBLOK_TOKEN }}" >> .env
+          echo "STORYBLOK_TOKEN=${{ vars.STORYBLOK_TOKEN }}" >> .env
       - name: Install, build, and upload your site
         uses: withastro/action@v3
 
