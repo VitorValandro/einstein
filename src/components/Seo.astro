@@ -1,5 +1,5 @@
 ---
-import type { SBAsset } from '../types';
+import type { SBAsset } from "../types";
 
 interface Props {
   title: string;
@@ -10,9 +10,7 @@ interface Props {
 const { title, description, favicon } = Astro.props;
 
 const defaultOgImage = "https://a-us.storyblok.com/f/1021619/258x168/b49b50638c/logo.svg";
-const faviconUrl = favicon?.filename
-  ? favicon.filename
-  : `/favicon.ico`;
+const faviconUrl = favicon?.filename ? favicon.filename : `/public/favicon.ico`;
 ---
 
 <Fragment>
@@ -26,5 +24,10 @@ const faviconUrl = favicon?.filename
   <meta property="twitter:image" content={defaultOgImage} />
 
   <!-- Use favicon from CMS if it exists, otherwise use default -->
-  <link rel="icon" href={faviconUrl} type={favicon?.filename ? "image/png" : "image/x-icon" } sizes="any" />
+  <link
+    rel="icon"
+    href={faviconUrl}
+    type={favicon?.filename ? "image/png" : "image/x-icon"}
+    sizes="any"
+  />
 </Fragment>
