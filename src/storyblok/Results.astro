@@ -1,0 +1,36 @@
+---
+import AnimatedNumber from "../components/AnimatedNumber";
+import Headline from "../components/Headline.astro";
+import { Blok, SBRichText } from "../types";
+
+interface Props {
+  blok: {
+    stats: Blok<{
+      title: SBRichText;
+      number: number;
+    }>[];
+  };
+}
+
+const { blok } = Astro.props;
+const { stats } = blok;
+---
+
+<section class="flex flex-col items-center px-6">
+  <div
+    class="flex-1 flex flex-col md:flex-row gap-6 md:gap-20 max-w-container py-8 items-center justify-center"
+  >
+    {
+      stats.map((stat) => (
+        <div class="flex flex-col gap-2 text-center items-center justify-center">
+          <AnimatedNumber
+            client:visible
+            finalValue={stat.number}
+            className="text-brand-secondary-default text-7xl"
+          />
+          <Headline element="h3">{stat.title}</Headline>
+        </div>
+      ))
+    }
+  </div>
+</section>

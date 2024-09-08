@@ -20,6 +20,7 @@ export default defineConfig({
         components: {
           hero: 'storyblok/Hero',
           page: 'storyblok/Page',
+          results: 'storyblok/Results',
         },
         apiOptions: {
           region: 'us',
