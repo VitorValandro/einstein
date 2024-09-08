@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 import storyblok from '@storyblok/astro';
 import { loadEnv } from 'vite';
 
-const env = loadEnv("", process.cwd(), 'STORYBLOK');
+const { STORYBLOK_TOKEN } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,7 +18,7 @@ export default defineConfig({
       }),
       react(),
       storyblok({
-        accessToken: env.STORYBLOK_TOKEN,
+        accessToken: import.meta.env.STORYBLOK_TOKEN || STORYBLOK_TOKEN,
         components: {
           hero: 'storyblok/Hero',
           page: 'storyblok/Page',
