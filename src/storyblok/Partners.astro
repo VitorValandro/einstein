@@ -1,0 +1,43 @@
+---
+import RichText from "../components/RichText.astro";
+import { Blok, SBAsset, SBLink, SBRichText } from "../types";
+import { getUrlFromSBLink } from "../utilts";
+
+interface Props {
+  blok: {
+    headline: SBRichText;
+    companies: Blok<{
+      image: SBAsset;
+      link: SBLink;
+    }>[];
+  };
+}
+
+const trustSealsOverlayFilter = `url('data:image/svg+xml,\
+    <svg xmlns="http://www.w3.org/2000/svg"><filter id="svgTint"><feColorMatrix id="fe" type="matrix" values="0.7890625 0 0 0 0.140625 0.58984375 0 0 0 0.33984375 0.390625 0 0 0 0.5390625 0 0 0 1 0"></feColorMatrix></feColorMatrix></filter></svg>#svgTint')`;
+
+const { blok } = Astro.props;
+const { headline, companies } = blok;
+---
+
+<section class="flex flex-col items-center px-6">
+  <div class="flex-1 flex flex-col gap-6 md:gap-16 max-w-container py-8 py-16">
+    <RichText text={headline} className={{ heading: "!text-5xl" }} />
+    <div
+      class="flex-1 flex flex-row gap-6 md:gap-20 max-w-container items-center justify-center flex-wrap"
+    >
+      {
+        companies.map((company) => (
+          <a href={getUrlFromSBLink(company.link)} target="_blank" rel="noopener noreferrer">
+            <img
+              class="h-8 md:h-16 filter transition-all duration-300 hover:!filter-none"
+              src={company.image.filename}
+              alt={company.image.alt}
+              style={{ filter: trustSealsOverlayFilter }}
+            />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
