@@ -6,8 +6,6 @@ import { loadEnv } from 'vite';
 
 const { STORYBLOK_TOKEN } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
-console.log("TEEEST", import.meta.env.STORYBLOK_TOKEN || STORYBLOK_TOKEN);
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://vitorvalandro.github.io',
