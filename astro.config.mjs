@@ -18,7 +18,7 @@ export default defineConfig({
       }),
       react(),
       storyblok({
-        accessToken: import.meta.env.STORYBLOK_TOKEN || STORYBLOK_TOKEN,
+        accessToken: "q9Z32rkApZt84upRGkM2ywtt",
         components: {
           hero: 'storyblok/Hero',
           page: 'storyblok/Page',
