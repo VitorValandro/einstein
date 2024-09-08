@@ -6,6 +6,8 @@ import { loadEnv } from 'vite';
 
 const { STORYBLOK_TOKEN } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
+console.log("TEEEEST", STORYBLOK_TOKEN)
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://vitorvalandro.github.io',
@@ -18,7 +20,7 @@ export default defineConfig({
       }),
       react(),
       storyblok({
-        accessToken: "q9Z32rkApZt84upRGkM2ywtt",
+        accessToken: STORYBLOK_TOKEN,
         components: {
           hero: 'storyblok/Hero',
           page: 'storyblok/Page',
