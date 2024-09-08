@@ -24,6 +24,7 @@ export default defineConfig({
           about: 'storyblok/About',
           partners: 'storyblok/Partners',
           testimonials: 'storyblok/Testimonials',
+          "join-us": 'storyblok/JoinUs',
         },
         apiOptions: {
           region: 'us',

@@ -1,0 +1,83 @@
+---
+import Button from "../components/Button";
+import Headline from "../components/Headline.astro";
+import RichText from "../components/RichText.astro";
+import { Blok, SBCta, SBRichText } from "../types";
+import { getWebpVersionFromSBImage } from "../utilts";
+
+interface Props {
+  blok: {
+    headline: SBRichText;
+    cards: Blok<{
+      title: string;
+      content: SBRichText;
+      steps: Blok<{
+        content: string;
+      }>[];
+      cta: Blok<SBCta>[];
+    }>[];
+  };
+}
+
+const { blok } = Astro.props;
+const { headline, cards } = blok;
+---
+
+<section class="flex w-full flex-col items-center px-6 bg-brand-tertiary-default">
+  <div class="flex max-w-container flex-col w-full py-8 md:py-16 gap-3 md:gap-8">
+    <RichText className={{ heading: "text-white" }} text={headline} />
+
+    <ul class="flex flex-col md:flex-row w-full gap-4 justify-between">
+      {
+        cards.map((card) => {
+          const cta = card.cta[0];
+          return (
+            <li class="flex flex-col w-full p-4 bg-brand-primary-default rounded-xl text-brand-tertiary-900 gap-8">
+              <div class="flex flex-col flex-1">
+                <Headline element="h3" className="text-2xl font-bold mb-2">
+                  {card.title}
+                </Headline>
+                <RichText className={{ paragraph: "font-light leading-6" }} text={card.content} />
+
+                <ul class="flex flex-col gap-4 mt-2">
+                  {card.steps.map((item, index) => (
+                    <li class="relative flex flex-row gap-2 items-center">
+                      <div class="min-w-8 min-h-8 max-w-8 max-h-8 z-20 items-center justify-center flex bg-brand-secondary-900 rounded-full text-white font-bold">
+                        {index + 1}
+                      </div>
+                      {index !== card.steps.length - 1 && (
+                        <div class="absolute -bottom-6 left-[15px] h-full z-10 bg-white w-[2px]" />
+                      )}
+                      <p class="font-semibold">{item.content}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Button
+                variant="Primary"
+                className="w-full md:w-fit"
+                type={{
+                  tag: "anchor",
+                  href: cta.link,
+                }}
+                client:load
+              >
+                <div class="flex flex-row gap-2 items-center">
+                  {cta.icon?.filename && (
+                    <img
+                      class="size-8"
+                      src={getWebpVersionFromSBImage(cta.icon.filename)}
+                      alt={cta.icon.alt}
+                    />
+                  )}
+                  {cta.title}
+                </div>
+              </Button>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
