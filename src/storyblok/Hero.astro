@@ -1,7 +1,7 @@
 ---
 import { Blok, SBAsset, SBCta, SBRichText } from "../types";
 import RichText from "../components/RichText.astro";
-import { getWebpVersionFromSBImage } from "../utilts";
+import { getUrlFromSBLink, getWebpVersionFromSBImage } from "../utilts";
 import Button from "../components/Button";
 
 interface Props {
@@ -33,7 +33,7 @@ const cta = blok.cta[0];
         className="w-full md:w-fit"
         type={{
           tag: "anchor",
-          href: cta.link,
+          href: "#join-us",
         }}
         client:load
       >

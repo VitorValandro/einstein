@@ -5,7 +5,8 @@
 @layer base {
   html {
     font-family: "Inter", system-ui, sans-serif;
-    color: #011e30;
+    color: theme("colors.brand.tertiary.default");
+    scroll-behavior: smooth;
   }
 }
 

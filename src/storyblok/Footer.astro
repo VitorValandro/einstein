@@ -16,9 +16,7 @@ const { blok } = Astro.props;
 const { copyright, socials } = blok;
 ---
 
-<footer
-  class="bg-gradient-to-t from-brand-primary-200 to-white flex w-full flex-col gap-4 justify-center items-center py-8 md:py-16"
->
+<footer class="flex w-full flex-col gap-4 justify-center items-center py-8 md:py-16">
   <ul class="flex flex-row gap-3 h-6">
     {
       socials.map((social) => (
